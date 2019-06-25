@@ -225,6 +225,10 @@ def runOnVideo(net, meta, vid_source, thresh=.2, hier_thresh=.5, nms=.45):
     classes_font_colors = [(255, 255, 0), (0, 255, 255)]
     while video.isOpened():        
         res, frame = video.read()
+
+	#Resize video frame
+	frame = cv2.resize(frame, (320, 320))
+
         if not res:
             break        
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -259,5 +263,6 @@ if __name__ == "__main__":
     net = load_net("./cfg/yolov3-tiny.cfg".encode('utf-8'), 
 		   "./yolov3-tiny.weights".encode('utf-8'), 0)
     meta = load_meta("cfg/coco.data".encode('utf-8'))
-    vid_source = '../Videos/sample3.avi'
-    runOnVideo(net, meta, vid_source, thresh=.2)    
+    #vid_source = '../Videos/sample3.avi'
+    vid_source = 0
+    runOnVideo(net, meta, vid_source, thresh=.1)
